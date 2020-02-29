@@ -1,8 +1,10 @@
 # P5_03_GitRepository
 
-echo "# P5_03_GitRepository" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/thaislewkoedheccom/P5_03_GitRepository.git
-git push -u origin master
+## Objectifs
+
+Développer un système de recommendation de tags pour StackOverFlow.
+
+## Structure 
+
+1. Exploration et traitement de données textuelles 
+2. Développement de l'algorithme de recommendation final à déployer 
