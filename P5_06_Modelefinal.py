@@ -161,3 +161,40 @@ data[['Body']] = data[['Body']].applymap(remove_low_freq_noverbs)
 #########################
 # modélisation
 #########################
+multilabel_binarizer = MultiLabelBinarizer()
+y_tags = multilabel_binarizer.fit_transform(data['Tags'])
+
+
+X_train, X_test, y_train, y_test = train_test_split(
+    data['Body'], y_tags, test_size=0.2,train_size=0.8, random_state=7)
+
+X_train = [" ".join(x) for x in X_train]
+X_test = [" ".join(x) for x in X_test]
+
+vectorizer = TfidfVectorizer(lowercase=False, max_features=1000)
+X_tfidf_train = vectorizer.fit_transform(X_train)
+X_tfidf_test = vectorizer.transform(X_test)
+
+mlp_classifier = MLPClassifier(solver= 'lbfgs', learning_rate= 'adaptive', hidden_layer_sizes=(203,), activation='relu', alpha= 0.696991203689759)
+mlp_classifier.fit(X_tfidf_train, y_train)
+mlp_predictions = mlp_classifier.predict_proba(X_tfidf_test)
+
+
+def prediction(test):
+    test = str.lower(test)
+    test = BeautifulSoup(test).get_text()
+    test = test.replace('\n', ' ')
+    test = test.replace('  ', ' ')
+    test = remove_stopwords(test)
+    test = remove_punctuations(test)
+    test = withoutverbs(test)
+    test = lemmatize_sentence(retest)
+    test = stemSentence(test)
+    test = remove_low_freq_noverbs(test)
+    test = untokenize(test)
+    X_tfidf_test = vectorizer.transform([test])
+    mlp_predictions = mlp_classifier.predict_proba(X_tfidf_test)
+    thresh = 0.35
+    pred = (mlp_predictions>thresh).astype(int)
+    print("The suggested tags are:")
+    print(multilabel_binarizer.inverse_transform(pred))
