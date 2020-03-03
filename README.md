@@ -6,5 +6,5 @@ Développer un système de recommendation de tags pour StackOverFlow.
 
 ## Structure 
 
-1. Exploration et traitement de données textuelles 
-2. Développement de l'algorithme de recommendation final à déployer 
+1. Modèle final à déployer avec traitement de texte
+2. API disponible avec Streamlit
