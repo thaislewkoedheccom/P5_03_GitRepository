@@ -7,4 +7,4 @@ Développer un système de recommendation de tags pour StackOverFlow.
 ## Structure 
 
 1. Modèle final à déployer avec traitement de texte
-2. API disponible avec Streamlit
+2. API disponible avec Streamlit (à utiliser avec corpusnoverbs data).
